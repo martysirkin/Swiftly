@@ -1,0 +1,13 @@
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\bin\Debug\netcoreapp3.1\Swiftly.exe
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\bin\Debug\netcoreapp3.1\Swiftly.deps.json
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\bin\Debug\netcoreapp3.1\Swiftly.runtimeconfig.json
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\bin\Debug\netcoreapp3.1\Swiftly.runtimeconfig.dev.json
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\bin\Debug\netcoreapp3.1\Swiftly.dll
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\bin\Debug\netcoreapp3.1\Swiftly.pdb
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\obj\Debug\netcoreapp3.1\Swiftly.csprojAssemblyReference.cache
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\obj\Debug\netcoreapp3.1\Swiftly.AssemblyInfoInputs.cache
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\obj\Debug\netcoreapp3.1\Swiftly.AssemblyInfo.cs
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\obj\Debug\netcoreapp3.1\Swiftly.csproj.CoreCompileInputs.cache
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\obj\Debug\netcoreapp3.1\Swiftly.dll
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\obj\Debug\netcoreapp3.1\Swiftly.pdb
+C:\Users\marty\Source\Repos\Swiftly\Swiftly\obj\Debug\netcoreapp3.1\Swiftly.genruntimeconfig.cache
