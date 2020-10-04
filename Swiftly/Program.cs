@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Xml.Schema;
 
 namespace Swiftly
 {
@@ -13,7 +12,7 @@ namespace Swiftly
     /*** Software, and to permit persons to whom the Software is furnished to do so,       ***/
     /*** subject to the following conditions:                                              ***/
     /***                                                                                   ***/
-    /***                                                                                   ***/ 
+    /***                                                                                   ***/
     /*** The above copyright notice and this permission notice shall be included in all    ***/
     /*** copies or substantial portions of the Software.                                   ***/
     /***                                                                                   ***/
@@ -61,9 +60,10 @@ namespace Swiftly
             private string ProdUOM;
             private string ProdSize;
             private double TaxRate = 0;
-            
+
             // Constructor
-            public Product (string id, string desc, string flags, string productSize) {
+            public Product(string id, string desc, string flags, string productSize)
+            {
                 // Fields for flags
                 bool bPerWeight = false;
                 bool bTaxable = false;
@@ -87,7 +87,8 @@ namespace Swiftly
                 if (bPerWeight)
                 {
                     this.ProdUOM = UOM_POUND;
-                } else
+                }
+                else
                 {
                     this.ProdUOM = UOM_EACH;
                 }
@@ -95,8 +96,8 @@ namespace Swiftly
                 // Set the product size
                 this.ProdSize = productSize;
 
-               // Set the tax rate
-               if (bTaxable)
+                // Set the tax rate
+                if (bTaxable)
                 {
                     this.TaxRate = GLOBAL_TAX_RATE;
                 }
@@ -146,7 +147,8 @@ namespace Swiftly
 
                 // Return the new product object that we created
                 return new Product(productId, productDescription, flags, productSize);
-            } catch
+            }
+            catch
             {
                 return null;
             }
@@ -158,14 +160,14 @@ namespace Swiftly
         /***     Copyright 2020 MAJE Software. All Rights Reserved.                    ***/
         /*********************************************************************************/
         static void loadInputFile()
-        { 
+        {
             int intLineNum = 1;
 
             string[] lines = System.IO.File.ReadAllLines(@"C:\Users\marty\Source\Repos\Swiftly\Swiftly\input.txt");
-         
+
             foreach (string line in lines)
             {
-                
+
                 Product newProduct = parseInputString(line);
 
                 if (newProduct == null)
