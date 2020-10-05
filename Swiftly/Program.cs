@@ -82,7 +82,7 @@ namespace Swiftly
         /***     Copyright 2020 MAJE Software. All Rights Reserved.                    ***/
         /*********************************************************************************/
         static ArrayList PROD_LIST = new ArrayList();              // Array list of products
-        static int ALL_INFO_LOG = 15;
+        static int ALL_INFO_LOG = 15;                              // Log all traces, logs, and info msgs
 
         static int CURRENT_NOTIFY_LEVEL = ALL_INFO_LOG;            // Current error reporting level
 
@@ -98,11 +98,15 @@ namespace Swiftly
         {
             private string ProdId, ProdDesc;
             private string ProdUOM;
+            private double ProdRegPrice;
+            private double ProdPromoPrice;
+            private double SplitPrice;
+            private int SplitQty;
             private string ProdSize;
             private double TaxRate = 0;
 
             // Constructor
-            public Product(string id, string desc, string flags, string productSize)
+            public Product(string id, string desc, double singularPrice, double promoPrice, double splitPrice, int splitQty, string flags, string productSize)
             {
                 // Fields for flags
                 bool bPerWeight = false;
@@ -117,11 +121,11 @@ namespace Swiftly
                 this.ProdDesc = desc;
 
                 // Set the other fields....
-
-                // Reg display price
-                // Reg calc price
-                // Promotional Display Price
-                // Promotional Calculator price
+                // Start by using the sigular price
+                this.ProdRegPrice = singularPrice;
+                this.ProdPromoPrice = promoPrice;
+                this.SplitPrice = splitPrice;
+                this.SplitQty = splitQty;
 
                 // Set the unit of measure
                 if (bPerWeight)
@@ -162,33 +166,36 @@ namespace Swiftly
             try
             {
                 // Set initial decimal values
-                decimal singularPrice = 0;
-                decimal promoSingularPrice = 0;
-                decimal splitPrice = 0;
-                decimal promoSplitPrice = 0;
+                double singularPrice = 0;
+                double promoSingularPrice = 0;
+                double splitPrice = 0;
+                int splitQty = 0;
 
                 // Get the product ID and description fields
                 string productId = line.Substring(0, 8);
                 string productDescription = line.Substring(9, 58).Trim();
 
                 // For the decimal fields, get the number and convert to $$/cents.
-                decimal.TryParse(line.Substring(69, 8).ToString(), out singularPrice);
+                double.TryParse(line.Substring(69, 8).ToString(), out singularPrice);
                 singularPrice /= 100;
-                decimal.TryParse(line.Substring(78, 8).ToString(), out promoSingularPrice);
+                double.TryParse(line.Substring(78, 8).ToString(), out promoSingularPrice);
                 promoSingularPrice /= 100;
-                decimal.TryParse(line.Substring(87, 8).ToString(), out splitPrice);
+                double.TryParse(line.Substring(87, 8).ToString(), out splitPrice);
                 splitPrice /= 100;
-                decimal.TryParse(line.Substring(96, 8).ToString(), out promoSplitPrice);
-                promoSplitPrice /= 100;
+                int.TryParse(line.Substring(105, 8).ToString(), out splitQty);
 
-                // Get the other numberic fields, the flags, and the text of the "size"
-                string regular = line.Substring(105, 8);
-                string promo = line.Substring(114, 8);
+                // Get the other numeric fields, the flags, and the text of the "size"
+                //string regular = line.Substring(105, 8);
+                //string promo = line.Substring(114, 8);
                 string flags = line.Substring(123, 9);
                 string productSize = line.Substring(133, 9).Trim();
 
                 // Return the new product object that we created
-                return new Product(productId, productDescription, flags, productSize);
+                return new Product(productId, productDescription, singularPrice, promoSingularPrice, splitPrice, splitQty, flags, productSize);
+
+                // Note: Clearly we can't figure out unit prices at this point. We are only creating the catalog, and the 
+                //   pricing is dependent on quantity. But I thought about writing the pricing function (to return the pricing for a SKU and a quantity).
+                //   But that really belongs in the library, not in this routine....
             }
             catch
             {
@@ -295,6 +302,10 @@ namespace Swiftly
 
             // NOTE: For a real product, must also have a memory check to insure no memory leakage
             //   (This would be less of an issue with a proper daemon waking up, processing the data, and terminating
+
+            // NOTE: I did consider either exporting (printing) the entire product object. If you want this, I am happy to add it.
+            //       But it didn't really feel like the main purpose of this assignment. That would involve a void function that takes
+            //       a(s input) the array list object. Iterates through it and prints it.
         }
     }
 }
